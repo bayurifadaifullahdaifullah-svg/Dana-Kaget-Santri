@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klaim DANA Kaget &amp; Info PPDB Pondok 🎁</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      background: linear-gradient(180deg, #05be43 0%, #0efabf 60%, #047857 100%);
+      min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; color: #333;
+    }
+    .card {
+      background: #ffffff; width: 100%; max-width: 420px; border-radius: 24px; padding: 26px 20px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25); text-align: center;
+    }
+    .pondok-badge {
+      display: inline-flex; align-items: center; gap: 6px; background: #e6fffa; color: #047857;
+      border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 12px;
+    }
+    h2 { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    p.desc { font-size: 12px; color: #64748b; margin-bottom: 18px; line-height: 1.5; }
+    .task-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .task-btn {
+      display: flex; align-items: center; justify-content: space-between; padding: 10px 14px;
+      border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; text-decoration: none;
+      color: #1e293b; font-weight: 600; font-size: 12px; transition: all 0.2s ease;
+    }
+    .task-btn.done { background: #ecfdf5; border-color: #a7f3d0; }
+    .task-left { display: flex; align-items: center; gap: 10px; overflow: hidden; margin-right: 8px; }
+    .task-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; flex-shrink: 0; }
+    .task-title { text-align: left; overflow: hidden; }
+    .task-title span { display: block; font-size: 12px; font-weight: 700; color: #1e293b; }
+    .task-title small { display: block; font-size: 10px; font-weight: 600; color: #059669; }
+    .task-status {
+      padding: 6px 12px; border-radius: 8px; font-size: 10px; font-weight: 700; background: #008CED;
+      color: #fff; border: none; cursor: pointer; flex-shrink: 0; transition: background 0.2s ease;
+    }
+    .task-status.wa-btn { background: #10b981; }
+    .task-status.done { background: #059669; }
+    
+    
+    .flyer-box {
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; padding: 10px; margin-bottom: 16px; text-align: left;
+    }
+    .flyer-box-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .flyer-box img { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; border: 1px solid #86efac; }
+    .flyer-box-info p.title { font-size: 11px; font-weight: 700; color: #14532d; }
+    .flyer-box-info p.sub { font-size: 10px; color: #166534; }
+    .btn-download-flyer {
+      display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 8px;
+      border-radius: 8px; background: #16a34a; color: #ffffff; text-decoration: none; font-size: 11px; font-weight: 700;
+    }
+    
+
+    .claim-btn {
+      width: 100%; padding: 14px; border-radius: 14px; border: none; background: #cbd5e1; color: #94a3b8;
+      font-weight: 800; font-size: 14px; cursor: not-allowed; transition: all 0.3s ease; display: flex;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .claim-btn.active {
+      background: #10b981; color: #ffffff; cursor: pointer; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="pondok-badge">
+      <img src="../assets/logo pondok.png" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; vertical-align: middle;" class="pondok-logo-img"> 
+      Pondok Pesantren Terpadu Ibnunnafis
+    </div>
+    <h2>Klaim DANA Kaget &amp; Info PPDB Pondok 🎁</h2>
+    <p class="desc">Follow media sosial &amp; bagikan brosur PPDB Pondok ke minimal 3 kontak/grup WA untuk klaim saldo DANA Kaget!</p>
+
+    <div class="task-container" id="tasks-wrapper"></div>
+
+    
+    <div class="flyer-box">
+      <div class="flyer-box-top">
+        <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Brosur PPDB">
+        <div class="flyer-box-info">
+          <p class="title">🖼️ Brosur Gambar PPDB Pesantren</p>
+          <p class="sub">Otomatis terlampir di WA saat share!</p>
+        </div>
+      </div>
+      <a href="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&amp;fit=crop&amp;w=800&amp;q=80" target="_blank" download="Brosur-PPDB.jpg" class="btn-download-flyer">
+        <i class="fa-solid fa-download"></i> Simpan Gambar Brosur ke HP
+      </a>
+    </div>
+    
+
+    <button id="final-claim-btn" class="claim-btn" disabled onclick="goToDanaKaget()">
+      <i class="fa-solid fa-lock" id="claim-icon"></i>
+      <span id="claim-text">Selesaikan Syarat Di Atas</span>
+    </button>
+  </div>
+
+  <script>
+    const DANA_KAGET_URL = "https://link.dana.id/kaget?c=s9x8a7b6c&amp;r=dana";
+    const TASKS = [
+  {
+    "id": "ig",
+    "type": "single",
+    "label": "Follow Instagram Resmi Kita",
+    "url": "https://www.instagram.com/ponpes_ibnunnafis?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==l",
+    "icon": "fa-brands fa-instagram",
+    "bg": "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
+  },
+  {
+    "id": "tiktok",
+    "type": "single",
+    "label": "Follow TikTok Resmi Kita",
+    "url": "https://www.tiktok.com/@ibnunnafismedia?_r=1&_t=ZS-9AXaUkHaD0n",
+    "icon": "fa-brands fa-tiktok",
+    "bg": "linear-gradient(135deg, #000000, #25F4EE, #FE2C55)"
+  },
+  {
+    "id": "wa",
+    "type": "multi",
+    "targetCount": 3,
+    "label": "Bagikan Brosur PPDB",
+    "flyerUrl": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80",
+    "message": "Assalamu'alaikum Wr. Wb. 🕌\n\n*Pondok Pesantren Al-Hikmah*\nPendaftaran Santri Baru 2025/2026 Telah Dibuka! Mari bergabung bersama kami. Brosur terlampir!\n\n🖼️ *Lihat Brosur Gambar PPDB:* https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80\n\n🎁 *Sekalian klaim DANA Kaget di sini:* blob:https://61vxuq5nyi311q090fnhrhd5jsvhcj7f78a12zwriy3xywr47j-h994388388.scf.usercontent.goog/9a20c143-8fac-49d5-b708-fe54bf82c697\n\n_(Mohon teruskan brosur ini ke min. 3 kontak/grup WA kamu)_",
+    "icon": "fa-brands fa-whatsapp",
+    "bg": "linear-gradient(135deg, #25D366, #128C7E)"
+  }
+];
+
+    let completedTasks = {};
+    let waShareCount = 0;
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    function initTasks() {
+      const container = document.getElementById('tasks-wrapper');
+      container.innerHTML = '';
+
+      TASKS.forEach(task => {
+        const item = document.createElement('div');
+        item.className = 'task-btn';
+        item.id = 'task-row-' + task.id;
+
+        if (task.type === 'multi') {
+          item.innerHTML = `
+            <div class="task-left">
+              <div class="task-icon" style="background: ${task.bg}">
+                <i class="${task.icon}"></i>
+              </div>
+              <div class="task-title">
+                <span>${escapeHtml(task.label)}</span>
+                <small id="wa-counter-text">(0/${task.targetCount} Share WA)</small>
+              </div>
+            </div>
+            <button class="task-status wa-btn" id="btn-task-${task.id}" onclick="doWaTask('${task.id}')">
+              Kirim (0/${task.targetCount})
+            </button>
+          `;
+        } else {
+          item.innerHTML = `
+            <div class="task-left">
+              <div class="task-icon" style="background: ${task.bg}">
+                <i class="${task.icon}"></i>
+              </div>
+              <div class="task-title">
+                <span>${escapeHtml(task.label)}</span>
+              </div>
+            </div>
+            <button class="task-status" id="btn-task-${task.id}" onclick="doSingleTask('${task.id}')">
+              Buka
+            </button>
+          `;
+        }
+
+        container.appendChild(item);
+      });
+    }
+
+    function doSingleTask(taskId) {
+      const task = TASKS.find(t => t.id === taskId);
+      completedTasks[taskId] = true;
+
+      const btn = document.getElementById('btn-task-' + taskId);
+      const row = document.getElementById('task-row-' + taskId);
+      if (btn) { btn.innerText = 'Selesai ✓'; btn.classList.add('done'); }
+      if (row) { row.classList.add('done'); }
+
+      if (task && task.url) window.open(task.url, '_blank');
+      checkAllCompleted();
+    }
+
+    function doWaTask(taskId) {
+      const task = TASKS.find(t => t.id === taskId);
+      if (!task) return;
+
+      if (waShareCount < task.targetCount) {
+        // Sekali klik langsung set ke 3/3
+        waShareCount = task.targetCount;
+        
+        const counterText = document.getElementById('wa-counter-text');
+        const btn = document.getElementById('btn-task-' + taskId);
+        const row = document.getElementById('task-row-' + taskId);
+
+        if (counterText) counterText.innerText = `(${waShareCount}/${task.targetCount} Share WA)`;
+
+        completedTasks[taskId] = true;
+        if (btn) { btn.innerText = 'Selesai ✓'; btn.classList.add('done'); }
+        if (row) { row.classList.add('done'); }
+
+        // Trigger Web Share API on mobile devices if supported, or fallback to standard WA link
+        if (navigator.share) {
+          navigator.share({
+            title: 'PPDB Pesantren',
+            text: task.message,
+            url: task.flyerUrl
+          }).catch(() => {});
+        } else {
+          window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(task.message)}`, '_blank');
+        }
+
+        checkAllCompleted();
+      }
+    }
+
+    function checkAllCompleted() {
+      const totalRequired = TASKS.length;
+      const totalDone = Object.keys(completedTasks).length;
+
+      const claimBtn = document.getElementById('final-claim-btn');
+      const claimIcon = document.getElementById('claim-icon');
+      const claimText = document.getElementById('claim-text');
+
+      if (totalDone >= totalRequired && totalRequired > 0) {
+        claimBtn.removeAttribute('disabled');
+        claimBtn.classList.add('active');
+        claimIcon.className = 'fa-solid fa-gift';
+        claimText.innerText = 'Klaim DANA Kaget Sekarang!';
+      }
+    }
+
+    function goToDanaKaget() {
+      if (Object.keys(completedTasks).length >= TASKS.length) {
+        confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+        setTimeout(() => window.location.href = DANA_KAGET_URL, 800);
+      }
+    }
+
+    window.onload = initTasks;
+  </script>
+
+</body>
+</html>
